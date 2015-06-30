@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.databox</groupId>
+	<artifactId>custom-datasource-sdk</artifactId>
+	<version>1.1.1-SNAPSHOT</version>
+	<name>custom-datasource-sdk</name>
+	<description>The Java SDK for interacting with the Databox Push API.</description>
+	<packaging>jar</packaging>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<properties>
+		<java.source.version>1.6</java.source.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<junit.version>4.10</junit.version>
+	</properties>
+
+	<scm>
+		<connection>scm:git:ssh://git@github.com/umajeric/databox-java-sdk.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/umajeric/databox-java-sdk.git</developerConnection>
+		<url>https://github.com/umajeric/databox-java-sdk.git</url>
+		<tag>HEAD</tag>
+	</scm>
+
+	<distributionManagement>
+		<repository>
+			<id>umajeric-git-maven-public-releases</id>
+			<name>UMajeric Releases</name>
+			<url>git:releases://git@github.com:umajeric/maven-public-repo.git</url>
+		</repository>
+		<snapshotRepository>
+			<id>umajeric-git-maven-public-snapshots</id>
+			<name>UMajeric Snapshots</name>
+			<url>git:snapshots://git@github.com:umajeric/maven-public-repo.git</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<repositories>
+		<repository>
+			<id>java.net</id>
+			<url>https://maven.java.net/content/repositories/public/</url>
+		</repository>
+		<repository>
+			<id>mave-repo-1</id>
+			<url>http://repo.maven.apache.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>umajeric-public-repo</id>
+			<name>UMajeric Releases</name>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<url>https://raw.github.com/umajeric/maven-public-repo/releases</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>synergian-repo</id>
+			<url>https://raw.github.com/synergian/wagon-git/releases</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.5</version>
+		</dependency>
+
+		<!-- TEST scope dependencies -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.0.13</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>${java.source.version}</source>
+					<target>${java.source.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.4.2</version>
+				<configuration>
+					<goals>deploy</goals>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<releaseProfiles>release</releaseProfiles>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.scm</groupId>
+						<artifactId>maven-scm-api</artifactId>
+						<version>1.8.1</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.maven.scm</groupId>
+						<artifactId>maven-scm-provider-gitexe</artifactId>
+						<version>1.8.1</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+
+		<extensions>
+			<extension>
+				<groupId>ar.com.synergian</groupId>
+				<artifactId>wagon-git</artifactId>
+				<version>0.2.1</version>
+			</extension>
+		</extensions>
+	</build>
+</project>
