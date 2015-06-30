@@ -36,7 +36,7 @@ Then add a dependency for Databox Custom DataSource artefact (see [here](https:/
 ```xml
 <dependency>
 	<groupId>com.databox</groupId>
-	<artifactId>custom-datasource-sdk</artifactId>
+	<artifactId>java-push-sdk</artifactId>
 	<version>LATEST</version>
 </dependency>
 ```
