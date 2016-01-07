@@ -25,6 +25,7 @@ import org.slf4j.LoggerFactory;
 public class Databox {
 	static final Logger logger = LoggerFactory.getLogger(Databox.class);
 	private static final String DEFAULT_HOST = "https://push2new.databox.com";
+	private static final String CLIENT_VERSION = "2.0";
 
 	private final String _token;
 	private String _host;
@@ -81,7 +82,7 @@ public class Databox {
 			conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Content-Type", "application/json");
-			conn.setRequestProperty("User-Agent", "java-sdk");
+			conn.setRequestProperty("User-Agent", "Databox/" + CLIENT_VERSION);
 
 			String encodedBytes = base64Encode((_token + ":").getBytes("UTF-8"));
 			String authorization = "Basic " + encodedBytes;
@@ -113,8 +114,8 @@ public class Databox {
 			logger.info(input.toString() + ": " + rawData);
 			return true;
 		} catch (Exception e) {
-			logger.error("Not send: " + rawData);
 			logger.error(e.getLocalizedMessage(), e);
+			throw new RuntimeException(e);
 		} finally {
 			if (conn != null) {
 				conn.disconnect();
@@ -127,7 +128,6 @@ public class Databox {
 				}
 			}
 		}
-		return false;
 	}
 
 	public void setHost(String host) {
@@ -183,7 +183,7 @@ public class Databox {
 		private String key;
 		private Object value;
 		private Date date;
-		private Map<String, Object> attributes = new HashMap<String, Object>();
+		private Map<String, Object> attributes = new HashMap<>();
 
 		static {
 			SDF = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");

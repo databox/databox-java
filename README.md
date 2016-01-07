@@ -19,6 +19,22 @@ The Java SDK for interacting with the Databox Push API v 2.0.
 		System.err.println(e.getLocalizedMessage());
 	}
 ```
+
+### Sending multiple metrics at once
+
+```java
+	String TOKEN = "your_token_goes_here";
+	Databox notification = new Databox(TOKEN);
+	try {
+		List<Databox.KPI> kpis = new ArrayList<Databox.KPI>();
+		kpis.add(new Databox.KPI().setKey("my_first_key").setValue(1201.41));
+		kpis.add(new Databox.KPI().setKey("my_second_key").setValue(8249));
+		notification.push(kpis);
+	} catch (Exception e) {
+		logger.error(e.getLocalizedMessage(), e);
+	}
+```
+
 ## License
 
 `databox-sdk` is licensed under the Apache License, Version 2.0 - see the [LICENSE](http://www.apache.org/licenses/LICENSE-2.0) file for details
