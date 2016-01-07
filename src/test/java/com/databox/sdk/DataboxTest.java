@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import junit.framework.TestCase;
 
@@ -28,18 +27,6 @@ public class DataboxTest extends TestCase {
 		Databox notification = new Databox(TOKEN);
 		try {
 			notification.push("kitchen_light", 341d, sdf.parse("2015-12-25 00:00:00"));
-		} catch (Exception e) {
-			logger.error(e.getLocalizedMessage(), e);
-		}
-	}
-
-	public void testPushArray() throws IOException {
-		Databox notification = new Databox(TOKEN);
-		try {
-			List<Databox.KPI> kpis = new ArrayList<>();
-			kpis.add(new Databox.KPI().setKey("my_first_key").setValue(1201.41));
-			kpis.add(new Databox.KPI().setKey("my_second_key").setValue(8249));
-			notification.push(kpis);
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage(), e);
 		}
