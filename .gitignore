@@ -2,6 +2,14 @@
 /.settings
 /.classpath
 /.project
+/.gradle
+/gradle
+/build
+/.idea
+gradlew
+gradlew.bat
+*.iml
+local.properties
 
 *.class
 
