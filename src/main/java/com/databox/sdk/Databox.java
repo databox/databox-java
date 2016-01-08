@@ -82,7 +82,7 @@ public class Databox {
 			conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Content-Type", "application/json");
-			conn.setRequestProperty("User-Agent", "Databox/" + CLIENT_VERSION);
+			conn.setRequestProperty("User-Agent", "Databox/" + CLIENT_VERSION + " (Java)");
 
 			String encodedBytes = base64Encode((_token + ":").getBytes("UTF-8"));
 			String authorization = "Basic " + encodedBytes;
