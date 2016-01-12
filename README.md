@@ -24,12 +24,12 @@ The Java SDK for interacting with the Databox Push API v 2.0.
 
 ```java
 	String TOKEN = "your_token_goes_here";
-	Databox notification = new Databox(TOKEN);
+	Databox databox = new Databox(TOKEN);
 	try {
 		List<Databox.KPI> kpis = new ArrayList<Databox.KPI>();
 		kpis.add(new Databox.KPI().setKey("my_first_key").setValue(1201.41));
 		kpis.add(new Databox.KPI().setKey("my_second_key").setValue(8249));
-		notification.push(kpis);
+		databox.push(kpis);
 	} catch (Exception e) {
 		logger.error(e.getLocalizedMessage(), e);
 	}
