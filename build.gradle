@@ -37,7 +37,7 @@ bintray {
     repo = 'databox'
     name = 'databox-sdk'
     userOrg = 'databox'
-    licenses = ['MIT-License']
+    licenses = ['MIT']
     vcsUrl = 'https://github.com/databox/databox-java.git'
     version {
       name = '2.0'
