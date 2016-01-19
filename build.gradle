@@ -33,7 +33,9 @@ dependencies {
 bintray {
   user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : ""
   key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : ""
-  configurations = ['archives']
+  // configurations = ['archives']
+  publications = ['mavenJava']
+
   pkg {
     repo = 'databox'
     name = 'databox-sdk'

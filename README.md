@@ -5,6 +5,25 @@
 
 The Java SDK for interacting with the [Databox](https://databox.com) Push API v 2.0.
 
+## Installation
+
+For [Gradle](http://gradle.org/) users. Add this to your `gradle.build`:
+
+```gradle
+repositories {
+  jcenter()
+  maven { url "http://dl.bintray.com/databox/databox" }
+}
+
+dependencies {
+  ...
+  compile 'com.databox:databox-java:2.0'
+  ...
+}
+```
+
+For [Maven](http://maven.org/) users. Get your [settings.xml at Bintray](https://bintray.com/databox/databox/databox-sdk/view).
+
 ## Requirements
 
 * Java >= 1.7 or later,
