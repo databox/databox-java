@@ -1,6 +1,6 @@
 # Databox Java SDK
 
-[![Build Status](https://travis-ci.org/umajeric/databox-java-sdk.png?branch=master)](https://travis-ci.org/umajeric/databox-java-sdk)
+[![Build Status](https://travis-ci.org/databox/databox-java.svg?branch=master)](https://travis-ci.org/databox/databox-java)
 
 The Java SDK for interacting with the [Databox](https://databox.com) Push API v 2.0.
 
