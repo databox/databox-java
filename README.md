@@ -6,7 +6,7 @@ The Java SDK for interacting with the [Databox](https://databox.com) Push API v 
 
 ## Requirements
 
-* Java >= 1.5 or later,
+* Java >= 1.7 or later,
 * Maven >= 3.0.3 OR Gradle 2.x
 
 ## Usage
