@@ -64,45 +64,47 @@ artifacts {
 
 def projectUrl = "https://github.com/databox/databox-java"
 
-publications {
-  mavenJava(MavenPublication) {
-   from components.java
+publishing{
+  publications {
+    mavenJava(MavenPublication) {
+     from components.java
 
-   artifact sourcesJar {
-    classifier "sources"
-   }
+     artifact sourcesJar {
+      classifier "sources"
+     }
 
-   artifact javadocJar {
-    classifier "javadoc"
-   }
+     artifact javadocJar {
+      classifier "javadoc"
+     }
 
-   pom.withXml {
-     asNode().children().last() + {
-       resolveStrategy = Closure.DELEGATE_FIRST
-       name 'Databox Java SDK'
-       description 'Java SDK for interacting with the Databox Push API.'
-       url projectUrl
-       scm {
+     pom.withXml {
+       asNode().children().last() + {
+         resolveStrategy = Closure.DELEGATE_FIRST
+         name 'Databox Java SDK'
+         description 'Java SDK for interacting with the Databox Push API.'
          url projectUrl
-         connection projectUrl
-         developerConnection projectUrl
-       }
-       licenses {
-         license {
-           name 'The MIT License (MIT)'
-           url 'http://rem.mit-license.org'
-           distribution 'repo'
+         scm {
+           url projectUrl
+           connection projectUrl
+           developerConnection projectUrl
          }
-       }
-       developers {
-         developer {
-           id 'otobrglez'
-           name 'Oto Brglez'
-           email 'otobrglez@gmail.com'
+         licenses {
+           license {
+             name 'The MIT License (MIT)'
+             url 'http://rem.mit-license.org'
+             distribution 'repo'
+           }
+         }
+         developers {
+           developer {
+             id 'otobrglez'
+             name 'Oto Brglez'
+             email 'otobrglez@gmail.com'
+           }
          }
        }
      }
-   }
+    }
   }
 }
 
