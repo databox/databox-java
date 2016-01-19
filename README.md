@@ -1,6 +1,7 @@
 # Databox Java SDK
 
 [![Build Status](https://travis-ci.org/databox/databox-java.svg?branch=master)](https://travis-ci.org/databox/databox-java)
+[ ![Download](https://api.bintray.com/packages/databox/databox/databox-sdk/images/download.svg) ](https://bintray.com/databox/databox/databox-sdk/_latestVersion)
 
 The Java SDK for interacting with the [Databox](https://databox.com) Push API v 2.0.
 
