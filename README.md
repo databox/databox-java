@@ -36,9 +36,28 @@ String TOKEN = "your_token_goes_here";
 Databox databox = new Databox(TOKEN);
 try {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-	databox.send("kitchen_light", 341d, sdf.parse("2015-12-25 00:00:00"));
+	databox.push("kitchen_light", 341d, sdf.parse("2015-12-25 00:00:00"));
 } catch (Exception e) {
-	System.err.println(e.getLocalizedMessage());
+	logger.error(e.getLocalizedMessage(), e);
+}
+```
+
+## Usage (with attributes)
+
+```java
+String TOKEN = "your_token_goes_here";
+Databox databox = new Databox(TOKEN);
+try {
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+	Databox.KPI kpi = new Databox.KPI()
+		.setKey("switch")
+		.setValue(0d)
+		.addAttribute("kitchen", 125)
+		.addAttribute("living_room", 412);
+		
+	databox.push(kpi);
+} catch (Exception e) {
+	logger.error(e.getLocalizedMessage(), e);
 }
 ```
 
