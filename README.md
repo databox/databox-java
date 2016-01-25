@@ -1,7 +1,7 @@
 # Databox Java SDK
 
-[![Build Status](https://travis-ci.org/databox/databox-java.svg?branch=master)](https://travis-ci.org/databox/databox-java)
-[ ![Download](https://api.bintray.com/packages/databox/databox/databox-sdk/images/download.svg) ](https://bintray.com/databox/databox/databox-sdk/_latestVersion)
+[![Build Status][ci-master-image]][ci-master]
+[![Download][download-image]][download]
 
 The Java SDK for interacting with the [Databox](https://databox.com) Push API v 2.0.
 
@@ -76,12 +76,31 @@ try {
 }
 ```
 
+### Retrieving last pushes
+
+```java
+Databox databox = new Databox(TOKEN);
+try {
+    StringBuffer lastPush = databox.lastPush(); // just last one
+    System.out.println(lastPush);
+    
+    StringBuffer lastPushes = databox.lastPushes(5); // last 5 pushes
+    System.out.println(lastPushes);    
+} catch (Exception e) {
+	logger.error(e.getLocalizedMessage(), e);
+}
+```
+
 ## License
 
-`databox-sdk` is licensed under the [MIT License](LICENSE).
+Licensed under the [MIT License](LICENSE).
 
 ## Authors
 
 - [Uros Majeric](http://github.com/umajeric)
 - [Oto Brglez](http://github.com/otobrglez)
 
+[ci-master]: https://travis-ci.org/databox/databox-java
+[ci-master-image]: https://travis-ci.org/databox/databox-java.svg?branch=master
+[download]: https://bintray.com/databox/databox/databox-sdk/_latestVersion
+[download-image]: https://api.bintray.com/packages/databox/databox/databox-sdk/images/download.svg

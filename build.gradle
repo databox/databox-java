@@ -1,112 +1,139 @@
 buildscript {
-  repositories {
-    jcenter()
-  }
-  dependencies {
-    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4'
-  }
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4'
+    }
 }
 
 apply plugin: 'java'
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 
+// apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+// apply plugin: 'pmd'
+
+def defaultEncoding = 'UTF-8'
+[compileJava, compileTestJava]*.options*.encoding = defaultEncoding
+
 archivesBaseName = 'databox-sdk'
 group = 'com.databox'
-version = '2.0'
+version = '2.1'
 
 repositories {
-  mavenCentral()
+    mavenCentral()
 }
 
 allprojects {
-  apply plugin: 'java'
-  sourceCompatibility = 1.7
-  targetCompatibility = 1.7
+    apply plugin: 'java'
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
 }
 
 dependencies {
-  compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.+'
-  testCompile group: 'junit', name: 'junit', version: '4.+'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.+'
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+findbugs {
+    ignoreFailures = true
+    // toolVersion = "2.0.1"
+    sourceSets = [sourceSets.main]
+    // reportsDir = file("$project.buildDir/reports/findbugs")
+    effort = "min"
+}
+
+tasks.withType(FindBugs) {
+    reportLevel = "high" // high
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+    exclude {
+        'RE_POSSIBLE_UNINTENDED_PATTERN'
+        'DM_DEFAULT_ENCODING'
+    }
 }
 
 bintray {
-  user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : ""
-  key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : ""
-  // configurations = ['archives']
-  publications = ['mavenJava']
+    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : ""
+    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : ""
+    // configurations = ['archives']
+    publications = ['mavenJava']
 
-  pkg {
-    repo = 'databox'
-    name = 'databox-sdk'
-    userOrg = 'databox'
-    licenses = ['MIT']
-    vcsUrl = 'https://github.com/databox/databox-java.git'
-    version {
-      name = '2.0'
-      desc = 'Databox Java SDK'
-      released = new Date()
+    pkg {
+        repo = 'databox'
+        name = 'databox-sdk'
+        userOrg = 'databox'
+        licenses = ['MIT']
+        vcsUrl = 'https://github.com/databox/databox-java.git'
+        version {
+            name = '2.0'
+            desc = 'Databox Java SDK'
+            released = new Date()
+        }
     }
-  }
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
-  classifier = 'sources'
-  from sourceSets.main.allSource
+    classifier = 'sources'
+    from sourceSets.main.allSource
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-  classifier = 'javadoc'
-  from javadoc.destinationDir
+    classifier = 'javadoc'
+    from javadoc.destinationDir
 }
 
 artifacts {
-  archives sourcesJar, javadocJar
+    archives sourcesJar, javadocJar
 }
 
 def projectUrl = "https://github.com/databox/databox-java"
 
-publishing{
-  publications {
-    mavenJava(MavenPublication) {
-     from components.java
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
 
-     artifact sourcesJar {
-      classifier "sources"
-     }
+            artifact sourcesJar {
+                classifier "sources"
+            }
 
-     artifact javadocJar {
-      classifier "javadoc"
-     }
+            artifact javadocJar {
+                classifier "javadoc"
+            }
 
-     pom.withXml {
-       asNode().children().last() + {
-         resolveStrategy = Closure.DELEGATE_FIRST
-         name 'Databox Java SDK'
-         description 'Java SDK for interacting with the Databox Push API.'
-         url projectUrl
-         scm {
-           url projectUrl
-           connection projectUrl
-           developerConnection projectUrl
-         }
-         licenses {
-           license {
-             name 'The MIT License (MIT)'
-             url 'http://rem.mit-license.org'
-             distribution 'repo'
-           }
-         }
-         developers {
-           developer {
-             id 'otobrglez'
-             name 'Oto Brglez'
-             email 'otobrglez@gmail.com'
-           }
-         }
-       }
-     }
+            pom.withXml {
+                asNode().children().last() + {
+                    resolveStrategy = Closure.DELEGATE_FIRST
+                    name 'Databox Java SDK'
+                    description 'Java SDK for interacting with the Databox Push API.'
+                    url projectUrl
+                    scm {
+                        url projectUrl
+                        connection projectUrl
+                        developerConnection projectUrl
+                    }
+                    licenses {
+                        license {
+                            name 'The MIT License (MIT)'
+                            url 'http://rem.mit-license.org'
+                            distribution 'repo'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id 'otobrglez'
+                            name 'Oto Brglez'
+                            email 'otobrglez@gmail.com'
+                        }
+                    }
+                }
+            }
+        }
     }
-  }
 }
 
