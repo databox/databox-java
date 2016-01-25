@@ -192,7 +192,6 @@ public class Databox {
   }
 
   private String base64Encode(byte[] input) {
-    Double version = Double.parseDouble(System.getProperty("java.specification.version"));
-    return version < 1.8 ? DatatypeConverter.printBase64Binary(input) : new String(Base64.getEncoder().encode(input));
+    return DatatypeConverter.printBase64Binary(input);
   }
 }
