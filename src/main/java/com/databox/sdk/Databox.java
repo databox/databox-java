@@ -14,6 +14,7 @@ import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.xml.bind.DatatypeConverter;
 
 public class Databox {
   static final Logger logger = LoggerFactory.getLogger(Databox.class);
@@ -77,9 +78,8 @@ public class Databox {
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setRequestProperty("User-Agent", "Databox/" + CLIENT_VERSION + " (Java)");
-      String encodedToken = new String(Base64.getEncoder().encode((_token + ": ").getBytes("UTF-8")));
+      String encodedToken = base64Encode((_token + ": ").getBytes("UTF-8"));
       conn.setRequestProperty("Authorization", "Basic " + encodedToken);
-
       conn.setDoOutput(true);
       conn.setDoInput(true);
       conn.setConnectTimeout(5000);
@@ -124,7 +124,7 @@ public class Databox {
 
   private HttpURLConnection buildConnection(String method, String path) throws IOException {
     HttpURLConnection connection = (HttpURLConnection) (new URL(_host + path)).openConnection();
-    String encodedToken = new String(Base64.getEncoder().encode((_token + ": ").getBytes("UTF-8")));
+    String encodedToken = base64Encode((_token + ": ").getBytes("UTF-8"));
     connection.setRequestProperty("Authorization", "Basic " + encodedToken);
     connection.setRequestProperty("Content-Type", "application/json");
     connection.setRequestProperty("User-Agent", "Databox/" + CLIENT_VERSION + " (Java)");
@@ -189,5 +189,10 @@ public class Databox {
 
   public StringBuffer lastPush() throws IOException {
     return lastPushes(1);
+  }
+
+  private String base64Encode(byte[] input) {
+    Double version = Double.parseDouble(System.getProperty("java.specification.version"));
+    return version < 1.8 ? DatatypeConverter.printBase64Binary(input) : new String(Base64.getEncoder().encode(input));
   }
 }
