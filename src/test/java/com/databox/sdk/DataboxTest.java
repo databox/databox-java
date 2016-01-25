@@ -2,8 +2,6 @@ package com.databox.sdk;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import junit.framework.TestCase;
@@ -25,8 +23,6 @@ public class DataboxTest extends TestCase {
 
     try {
       notification.push("kitchen_light", 341d, sdf.parse("2015-12-25 00:00:00"));
-
-
     } catch (Exception e) {
       logger.error(e.getLocalizedMessage(), e);
     }
@@ -34,12 +30,12 @@ public class DataboxTest extends TestCase {
 
   public void testLastPush() throws IOException {
     StringBuffer lastPush = new Databox(getToken()).lastPush();
-    System.out.println(lastPush);
+    assert lastPush.toString().matches("(.*)kitchen_light(.*)");
   }
 
   public void testLastPushes() throws IOException {
     StringBuffer lastPushes = new Databox(getToken()).lastPushes(3);
-    System.out.println(lastPushes);
+    assert lastPushes.toString().matches("(.*)kitchen_light(.*)");
   }
 
 }

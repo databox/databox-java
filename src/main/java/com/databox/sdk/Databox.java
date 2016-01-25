@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 public class Databox {
   static final Logger logger = LoggerFactory.getLogger(Databox.class);
   private static final String DEFAULT_HOST = "https://push2new.databox.com";
-  private static final String CLIENT_VERSION = "2.0";
+  private static final String CLIENT_VERSION = "2.1";
 
   private final String _token;
   private String _host;
@@ -67,6 +67,7 @@ public class Databox {
   }
 
   private boolean push(String rawData) {
+    //TODO: This must be overwritten. No time was scheduled to do this. Sorry. ;( Check 'post' and 'get' methods
     HttpURLConnection conn = null;
     OutputStream os = null;
     try {
@@ -75,10 +76,8 @@ public class Databox {
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setRequestProperty("User-Agent", "Databox/" + CLIENT_VERSION + " (Java)");
-
-      String encodedBytes = base64Encode((_token + ":").getBytes("UTF-8"));
-      String authorization = "Basic " + encodedBytes;
-      conn.setRequestProperty("Authorization", authorization);
+      String encodedToken = new String(Base64.getEncoder().encode((_token + ": ").getBytes("UTF-8")));
+      conn.setRequestProperty("Authorization", "Basic " + encodedToken);
 
       conn.setDoOutput(true);
       conn.setDoInput(true);
@@ -122,21 +121,34 @@ public class Databox {
     }
   }
 
+  private HttpURLConnection buildConnection(String method, String path) throws IOException {
+    HttpURLConnection connection = (HttpURLConnection) (new URL(_host + path)).openConnection();
+    String encodedToken = new String(Base64.getEncoder().encode((_token + ": ").getBytes("UTF-8")));
+    connection.setRequestProperty("Authorization", "Basic " + encodedToken);
+    connection.setRequestProperty("Content-Type", "application/json");
+    connection.setRequestProperty("User-Agent", "Databox/" + CLIENT_VERSION + " (Java)");
+    connection.setRequestMethod(method);
+    connection.setDoOutput(true);
+    connection.setDoInput(true);
+    connection.setConnectTimeout(5000);
+    return connection;
+  }
+
+  private StringBuffer lastResponse = null;
+  private int lastResponseCode = -1;
+
   private StringBuffer handleResponseInputStream(InputStream inputStream) throws IOException {
     StringBuffer stringBuffer = new StringBuffer();
     try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
       for (int c; (c = bufferedReader.read()) != -1; ) stringBuffer.append((char) c);
     }
+
+    lastResponse = stringBuffer;
     return stringBuffer;
   }
 
   private StringBuffer get(String path) throws IOException {
-    HttpURLConnection connection = (HttpURLConnection) (new URL(_host + path)).openConnection();
-    String encodedToken = new String(Base64.getEncoder().encode((_token + ":").getBytes("UTF-8")));
-    connection.setRequestProperty("Authorization", encodedToken);
-    connection.setDoOutput(true);
-    connection.setDoInput(true);
-    connection.setConnectTimeout(5000);
+    HttpURLConnection connection = buildConnection("GET", path);
     connection.connect();
 
     int responseCode = connection.getResponseCode();
@@ -144,146 +156,37 @@ public class Databox {
     StringBuffer responseAsString = handleResponseInputStream(
       (responseCode >= 200 && responseCode < 300) ? connection.getInputStream() : connection.getErrorStream());
 
+    lastResponseCode = responseCode;
+
+    connection.disconnect();
+    return responseAsString;
+  }
+
+  private StringBuffer post(String path, String rawData) throws IOException {
+    HttpURLConnection connection = buildConnection("POST", path);
+    connection.connect();
+
+    int responseCode = connection.getResponseCode();
+
+    DataOutputStream dataOutputStream = new DataOutputStream(connection.getOutputStream());
+    dataOutputStream.write(rawData.getBytes("UTF-8"));
+    dataOutputStream.flush();
+    dataOutputStream.close();
+
+    StringBuffer responseAsString = handleResponseInputStream(
+      (responseCode >= 200 && responseCode < 300) ? connection.getInputStream() : connection.getErrorStream());
+
+    lastResponseCode = responseCode;
+
+    connection.disconnect();
     return responseAsString;
   }
 
   public StringBuffer lastPushes(int n) throws IOException {
-    StringBuffer sb = get("/lastpushes/" + (n + ""));
-    return sb;
+    return get("/lastpushes/" + (n + ""));
   }
 
   public StringBuffer lastPush() throws IOException {
     return lastPushes(1);
-  }
-
-
-  public void setHost(String host) {
-    if (host == null || host.isEmpty()) {
-      throw new RuntimeException("Databox 'host' cannot be empty!");
-    }
-    if (!host.startsWith("http")) {
-      host = "http://" + host;
-    }
-    _host = host;
-  }
-
-  private String base64Encode(byte[] data) {
-    char[] tbl = {
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
-      'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
-      'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-      'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/'};
-
-    StringBuilder buffer = new StringBuilder();
-    int pad = 0;
-    for (int i = 0; i < data.length; i += 3) {
-
-      int b = ((data[i] & 0xFF) << 16) & 0xFFFFFF;
-      if (i + 1 < data.length) {
-        b |= (data[i + 1] & 0xFF) << 8;
-      } else {
-        pad++;
-      }
-      if (i + 2 < data.length) {
-        b |= (data[i + 2] & 0xFF);
-      } else {
-        pad++;
-      }
-
-      for (int j = 0; j < 4 - pad; j++) {
-        int c = (b & 0xFC0000) >> 18;
-        buffer.append(tbl[c]);
-        b <<= 6;
-      }
-    }
-    for (int j = 0; j < pad; j++) {
-      buffer.append("=");
-    }
-
-    return buffer.toString();
-  }
-
-  public static class KPI {
-    public static final TimeZone DEFAULT_TIME_ZONE = TimeZone.getTimeZone("UTC");
-    private static SimpleDateFormat SDF;
-
-    private String key;
-    private Object value;
-    private Date date;
-    private Map<String, Object> attributes = new HashMap<>();
-
-    static {
-      SDF = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-      SDF.setTimeZone(DEFAULT_TIME_ZONE);
-    }
-
-    public KPI() {
-    }
-
-    public String getKey() {
-      return key;
-    }
-
-    public KPI setKey(String key) {
-      this.key = key;
-      return this;
-    }
-
-    public Object getValue() {
-      return value;
-    }
-
-    public KPI setValue(Object value) {
-      this.value = value;
-      return this;
-    }
-
-    public Date getDate() {
-      return date;
-    }
-
-    public KPI setDate(Date date) {
-      this.date = date;
-      return this;
-    }
-
-    public KPI addAttribute(String key, Object value) {
-      attributes.put(key, value);
-      return this;
-    }
-
-    public KPI addAttributes(Map<String, Object> attributes) {
-      if (attributes != null) {
-        attributes.putAll(attributes);
-      }
-      return this;
-    }
-
-    public void removeAttribute(String key) {
-      if (attributes.containsKey(key)) {
-        attributes.remove(key);
-      }
-    }
-
-    public void clearAttributes() {
-      attributes.clear();
-    }
-
-    public Map<String, Object> getAttributes() {
-      return attributes;
-    }
-
-    @Override
-    public String toString() {
-      String json = " { \"$" + key + "\": " + value;
-      if (date != null) {
-        json += ", \"date\": \"" + SDF.format(date) + "\"";
-      }
-      for (Map.Entry<String, Object> atribute : attributes.entrySet()) {
-        json += ", \"" + atribute.getKey() + "\": \"" + atribute.getValue() + "\"";
-      }
-      json += "}";
-      return json;
-    }
   }
 }

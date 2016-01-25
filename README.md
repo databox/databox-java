@@ -57,9 +57,24 @@ try {
 }
 ```
 
+### Retrieving last pushes
+
+```java
+Databox databox = new Databox(TOKEN);
+try {
+    StringBuffer lastPush = databox.lastPush(); // just last one
+    System.out.println(lastPush);
+    
+    StringBuffer lastPushes = databox.lastPushes(5); // last 5 pushes
+    System.out.println(lastPushes);    
+} catch (Exception e) {
+	logger.error(e.getLocalizedMessage(), e);
+}
+```
+
 ## License
 
-`databox-sdk` is licensed under the [MIT License](LICENSE).
+Licensed under the [MIT License](LICENSE).
 
 ## Authors
 

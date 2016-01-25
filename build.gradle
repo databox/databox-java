@@ -20,7 +20,7 @@ def defaultEncoding = 'UTF-8'
 
 archivesBaseName = 'databox-sdk'
 group = 'com.databox'
-version = '2.0'
+version = '2.1'
 
 repositories {
     mavenCentral()
