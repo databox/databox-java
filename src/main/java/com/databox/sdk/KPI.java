@@ -82,8 +82,8 @@ public class KPI {
     if (date != null) {
       json += ", \"date\": \"" + SDF.format(date) + "\"";
     }
-    for (Map.Entry<String, Object> atribute : attributes.entrySet()) {
-      json += ", \"" + atribute.getKey() + "\": \"" + atribute.getValue() + "\"";
+    for (Map.Entry<String, Object> attribute : attributes.entrySet()) {
+      json += ", \"" + attribute.getKey() + "\": \"" + attribute.getValue() + "\"";
     }
     json += "}";
     return json;
