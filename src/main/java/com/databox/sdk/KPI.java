@@ -57,7 +57,7 @@ public class KPI {
 
   public KPI addAttributes(Map<String, Object> attributes) {
     if (attributes != null) {
-      attributes.putAll(attributes);
+      this.attributes.putAll(attributes);
     }
     return this;
   }
