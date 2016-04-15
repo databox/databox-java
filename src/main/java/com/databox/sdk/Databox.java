@@ -20,7 +20,7 @@ import javax.xml.bind.DatatypeConverter;
 public class Databox {
   static final Logger logger = LoggerFactory.getLogger(Databox.class);
   private static final String DEFAULT_HOST = "https://push2new.databox.com";
-  private static final String CLIENT_VERSION = "2.1";
+  private static final String CLIENT_VERSION = "2.2";
 
   private final String _token;
   private String _host;

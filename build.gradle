@@ -70,7 +70,7 @@ bintray {
         licenses = ['MIT']
         vcsUrl = 'https://github.com/databox/databox-java.git'
         version {
-            name = '2.1'
+            name = '2.2'
             desc = 'Databox Java SDK'
             released = new Date()
         }
