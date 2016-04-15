@@ -3,7 +3,7 @@
 [![Build Status][ci-master-image]][ci-master]
 [![Download][download-image]][download]
 
-The Java SDK for interacting with the [Databox](https://databox.com) Push API v 2.0.
+The Java SDK for interacting with the [Databox](https://databox.com) Push API v 2.2.
 
 ## Installation
 
@@ -17,7 +17,7 @@ repositories {
 
 dependencies {
   ...
-  compile 'com.databox:databox-java:2.0'
+  compile 'com.databox:databox-java:2.2'
   ...
 }
 ```
