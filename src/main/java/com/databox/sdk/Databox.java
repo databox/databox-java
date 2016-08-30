@@ -79,7 +79,7 @@ public class Databox {
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setRequestProperty("User-Agent", "databox-java/" + CLIENT_VERSION);
-      conn.setRequestProperty("Accept", "application/vnd.databox.v" + string.split(CLIENT_VERSION)[0] + "+json");
+      conn.setRequestProperty("Accept", "application/vnd.databox.v" + CLIENT_VERSION.split(".")[0] + "+json");
       String encodedToken = base64Encode((_token + ": ").getBytes("UTF-8"));
       conn.setRequestProperty("Authorization", "Basic " + encodedToken);
       conn.setDoOutput(true);
@@ -129,8 +129,8 @@ public class Databox {
     String encodedToken = base64Encode((_token + ": ").getBytes("UTF-8"));
     connection.setRequestProperty("Authorization", "Basic " + encodedToken);
     connection.setRequestProperty("Content-Type", "application/json");
-    conn.setRequestProperty("User-Agent", "databox-java/" + CLIENT_VERSION);
-    conn.setRequestProperty("Accept", "application/vnd.databox.v" + string.split(CLIENT_VERSION)[0] + "+json");
+    connection.setRequestProperty("User-Agent", "databox-java/" + CLIENT_VERSION);
+    connection.setRequestProperty("Accept", "application/vnd.databox.v" + CLIENT_VERSION.split(".")[0] + "+json");
     connection.setRequestMethod(method);
     connection.setDoOutput(true);
     connection.setDoInput(true);
