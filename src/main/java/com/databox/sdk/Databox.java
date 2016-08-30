@@ -19,8 +19,8 @@ import javax.xml.bind.DatatypeConverter;
 
 public class Databox {
   static final Logger logger = LoggerFactory.getLogger(Databox.class);
-  private static final String DEFAULT_HOST = "https://push2new.databox.com";
-  private static final String CLIENT_VERSION = "2.2";
+  private static final String DEFAULT_HOST = "https://push.databox.com";
+  private static final String CLIENT_VERSION = "2.3.0";
 
   private final String _token;
   private String _host;
@@ -78,7 +78,8 @@ public class Databox {
       conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
-      conn.setRequestProperty("User-Agent", "Databox/" + CLIENT_VERSION + " (Java)");
+      conn.setRequestProperty("User-Agent", "databox-java/" + CLIENT_VERSION);
+      conn.setRequestProperty("Accept", "application/vnd.databox.v" + string.split(CLIENT_VERSION)[0] + "+json");
       String encodedToken = base64Encode((_token + ": ").getBytes("UTF-8"));
       conn.setRequestProperty("Authorization", "Basic " + encodedToken);
       conn.setDoOutput(true);
@@ -128,7 +129,8 @@ public class Databox {
     String encodedToken = base64Encode((_token + ": ").getBytes("UTF-8"));
     connection.setRequestProperty("Authorization", "Basic " + encodedToken);
     connection.setRequestProperty("Content-Type", "application/json");
-    connection.setRequestProperty("User-Agent", "Databox/" + CLIENT_VERSION + " (Java)");
+    conn.setRequestProperty("User-Agent", "databox-java/" + CLIENT_VERSION);
+    conn.setRequestProperty("Accept", "application/vnd.databox.v" + string.split(CLIENT_VERSION)[0] + "+json");
     connection.setRequestMethod(method);
     connection.setDoOutput(true);
     connection.setDoInput(true);
@@ -184,12 +186,35 @@ public class Databox {
     return responseAsString;
   }
 
+  private StringBuffer delete(String path) throws IOException {
+    HttpURLConnection connection = buildConnection("DELETE", path);
+    connection.connect();
+
+    int responseCode = connection.getResponseCode();
+
+    StringBuffer responseAsString = handleResponseInputStream(
+      (responseCode >= 200 && responseCode < 300) ? connection.getInputStream() : connection.getErrorStream());
+
+    lastResponseCode = responseCode;
+
+    connection.disconnect();
+    return responseAsString;
+  }
+
   public StringBuffer lastPushes(int n) throws IOException {
-    return get("/lastpushes/" + (n + ""));
+    return get("/lastpushes?limit=" + (n + ""));
   }
 
   public StringBuffer lastPush() throws IOException {
     return lastPushes(1);
+  }
+
+  public StringBuffer metrics() throws IOException {
+    return get("/metrickeys");
+  }
+
+  public StringBuffer purge() throws IOException {
+    return delete("/data");
   }
 
   private String base64Encode(byte[] input) {
