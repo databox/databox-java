@@ -80,7 +80,7 @@ public class Databox {
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setRequestProperty("User-Agent", "databox-java/" + CLIENT_VERSION);
       conn.setRequestProperty("Accept", "application/vnd.databox.v" + CLIENT_VERSION.split("\\.")[0] + "+json");
-      String encodedToken = base64Encode((_token + ": ").getBytes("UTF-8"));
+      String encodedToken = base64Encode((_token + ":").getBytes("UTF-8"));
       conn.setRequestProperty("Authorization", "Basic " + encodedToken);
       conn.setDoOutput(true);
       conn.setDoInput(true);
@@ -126,7 +126,7 @@ public class Databox {
 
   private HttpURLConnection buildConnection(String method, String path) throws IOException {
     HttpURLConnection connection = (HttpURLConnection) (new URL(_host + path)).openConnection();
-    String encodedToken = base64Encode((_token + ": ").getBytes("UTF-8"));
+    String encodedToken = base64Encode((_token + ":").getBytes("UTF-8"));
     connection.setRequestProperty("Authorization", "Basic " + encodedToken);
     connection.setRequestProperty("Content-Type", "application/json");
     connection.setRequestProperty("User-Agent", "databox-java/" + CLIENT_VERSION);
