@@ -13,6 +13,7 @@ public class KPI {
   private String key;
   private Object value;
   private Date date;
+  private String unit;
   private Map<String, Object> attributes = new HashMap<>();
 
   static {
@@ -50,6 +51,15 @@ public class KPI {
     return this;
   }
 
+  public String getUnit() {
+    return unit;
+  }
+
+  public KPI setUnit(String unit) {
+    this.unit = unit;
+    return this;
+  }
+
   public KPI addAttribute(String key, Object value) {
     attributes.put(key, value);
     return this;
@@ -81,6 +91,9 @@ public class KPI {
     String json = " { \"$" + key + "\": " + value;
     if (date != null) {
       json += ", \"date\": \"" + SDF.format(date) + "\"";
+    }
+    if (unit != null) {
+      json += ", \"unit\": \"" + unit + "\"";
     }
     for (Map.Entry<String, Object> attribute : attributes.entrySet()) {
       json += ", \"" + attribute.getKey() + "\": \"" + attribute.getValue() + "\"";
