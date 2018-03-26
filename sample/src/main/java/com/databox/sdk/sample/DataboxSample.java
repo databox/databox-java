@@ -9,6 +9,9 @@ import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.databox.sdk.Databox;
+import com.databox.sdk.KPI;
+
 /**
  *
  * @author Uros Majeric
@@ -22,9 +25,9 @@ public class DataboxSample {
 		final String TOKEN = "my_api_key";
 		Databox notification = new Databox(TOKEN);
 		try {
-			List<Databox.KPI> kpis = new ArrayList<>();
-			kpis.add(new Databox.KPI().setKey("my_first_key").setValue(1201.41));
-			kpis.add(new Databox.KPI().setKey("my_second_key").setValue(8249));
+			List<KPI> kpis = new ArrayList<>();
+			kpis.add(new KPI().setKey("my_first_key").setValue(1201.41));
+			kpis.add(new KPI().setKey("my_second_key").setValue(8249));
 			notification.push(kpis);
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage(), e);

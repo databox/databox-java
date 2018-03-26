@@ -9,10 +9,10 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<java.source.version>1.6</java.source.version>
+		<java.source.version>1.7</java.source.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junit.version>4.10</junit.version>
-		<databox-sdk.version>2.0.0-SNAPSHOT</databox-sdk.version>
+		<databox-sdk.version>2.3</databox-sdk.version>
 	</properties>
 
 	<repositories>
@@ -21,39 +21,42 @@
 			<url>https://maven.java.net/content/repositories/public/</url>
 		</repository>
 		<repository>
-			<id>mave-repo-1</id>
-			<url>http://repo.maven.apache.org/maven2/</url>
+			<id>maven-central</id>
+			<url>http://central.maven.org/maven2/</url>
 		</repository>
 		<repository>
-			<id>umajeric-public-repo</id>
-			<name>UMajeric Releases</name>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
 			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<url>https://raw.github.com/umajeric/maven-public-repo/releases</url>
+          <enabled>false</enabled>
+      </snapshots>
+      <id>central</id>
+      <name>bintray</name>
+      <url>https://jcenter.bintray.com</url>
 		</repository>
 	</repositories>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.databox</groupId>
-			<artifactId>java-push-sdk</artifactId>
+			<artifactId>databox-java</artifactId>
 			<version>${databox-sdk.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+		      <artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
+
+		<dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.7</version>
+    </dependency>
 
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>1.0.13</version>
-		</dependency>
-
-		<dependency>
-			<groupId>si.majeric</groupId>
-			<artifactId>intercom-api-services</artifactId>
-			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
