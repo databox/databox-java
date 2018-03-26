@@ -24,6 +24,13 @@ dependencies {
 
 For [Maven](http://maven.org/) users. Get your [settings.xml at Bintray](https://bintray.com/databox/databox/databox-sdk/view).
 
+Or check out the `sample/` directory for both Maven and Gradle samples. You can build them like:
+
+`mvn clean install`
+`mvn exec:java -Dexec.mainClass="com.databox.sdk.sample.DataboxSample"`
+
+`gradle build`
+
 ## Requirements
 
 * Java >= 1.7 or later,
