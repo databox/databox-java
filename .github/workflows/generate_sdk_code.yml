@@ -5,7 +5,6 @@ on:
 env:
   GENERATOR_VERISON: "7.6.0" 
   CONFIG_FILE: "sdk-gen-config.json"
-  CODE_DIR: "src"
 jobs:
   sdk:
     name: Generate SDK code
@@ -61,7 +60,7 @@ jobs:
           run-id: ${{ github.event.client_payload.run_id }}
 
       - name: Remove old SDK
-        run: rm -rf ${{ env.OUTPUT_DIR }}/*
+        run: rm -rf src/*
 
       - name: Set API and SDK versions
         run: |
@@ -76,8 +75,8 @@ jobs:
       - name: Generate SDK
         run: |
           java --version
-          java -jar ${{ runner.temp }}/openapi-generator-cli.jar generate -i ${{ runner.temp }}/openapispec/openapi.yml -g csharp -o ./${{ env.OUTPUT_DIR }} -c ${{ runner.temp }}/${{ env.CONFIG_FILE }} --skip-validate-spec
-          cp ./${{ env.OUTPUT_DIR }}/README.md ./README.md
+          java -jar ${{ runner.temp }}/openapi-generator-cli.jar generate -i ${{ runner.temp }}/openapispec/openapi.yml -g csharp -o ./src -c ${{ runner.temp }}/${{ env.CONFIG_FILE }} --skip-validate-spec
+          cp ./src/README.md ./README.md
 
       - name: Create Pull Request
         id: cpr
