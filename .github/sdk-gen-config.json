@@ -1,0 +1,15 @@
+{
+  "artifactId": "databox",
+  "artifactVersion": "{VERSION}",
+  "artifactDescription": "SDK Client for using Databox Push API feature",
+  "artifactUrl": "https://github.com/databox/databox-java",
+  "scmUrl": "https://github.com/databox/databox-java",
+  "scmConnection": "scm:git:git@github.com:databox/databox-java.git",
+  "scmDeveloperConnection": "scm:git:git@github.com:databox/databox-java.git",
+  "developerName": "Databox",
+  "developerEmail": "",
+  "developerOrganization": "Databox",
+  "developerOrganizationUrl": "https://databox.com/",
+  "groupId": "org.databox",
+  "apiPackage": "org.databox.api"
+}
