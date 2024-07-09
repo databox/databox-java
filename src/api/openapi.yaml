@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   description: Push API resources Open API documentation
   title: Static OpenAPI document of Push API resource
-  version: 0.3.15-sdk.4
+  version: 0.3.15-sdk.5
 servers:
 - description: Dev mode server description
   url: https://push.databox.com
