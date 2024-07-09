@@ -1,16 +1,19 @@
-# Org.OpenAPITools.Model.PushData
+
+
+# PushData
+
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**Attributes** | [**List&lt;PushDataAttribute&gt;**](PushDataAttribute.md) |  | [optional] 
-**Date** | **string** |  | [optional] 
-**Key** | **string** |  | [optional] 
-**PeriodFrom** | **string** |  | [optional] 
-**PeriodTo** | **string** |  | [optional] 
-**Unit** | **string** |  | [optional] 
-**Value** | **float** |  | [optional] 
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**attributes** | [**List&lt;PushDataAttribute&gt;**](PushDataAttribute.md) |  |  [optional] |
+|**date** | **String** |  |  [optional] |
+|**key** | **String** |  |  [optional] |
+|**periodFrom** | **String** |  |  [optional] |
+|**periodTo** | **String** |  |  [optional] |
+|**unit** | **String** |  |  [optional] |
+|**value** | **Float** |  |  [optional] |
 
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
 
