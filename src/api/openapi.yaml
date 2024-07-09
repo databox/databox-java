@@ -14,6 +14,8 @@ paths:
       responses:
         "200":
           description: OK
+      x-accepts:
+      - application/json
     post:
       requestBody:
         content:
@@ -30,6 +32,9 @@ paths:
       responses:
         "200":
           description: OK
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /data/{metricKey}:
     delete:
       parameters:
@@ -43,11 +48,15 @@ paths:
       responses:
         "200":
           description: OK
+      x-accepts:
+      - application/json
   /metrickeys:
     get:
       responses:
         "200":
           description: OK
+      x-accepts:
+      - application/json
     post:
       requestBody:
         content:
@@ -60,11 +69,16 @@ paths:
       responses:
         "200":
           description: OK
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /ping:
     get:
       responses:
         "200":
           description: OK
+      x-accepts:
+      - application/json
 components:
   schemas:
     ApiResponse:

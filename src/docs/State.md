@@ -1,9 +1,13 @@
-# Org.OpenAPITools.Model.State
 
-## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
+# State
 
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+## Enum
+
+
+* `DOWN` (value: `"DOWN"`)
+
+* `UP` (value: `"UP"`)
+
+
 

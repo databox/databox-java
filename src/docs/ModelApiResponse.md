@@ -1,14 +1,14 @@
 
 
-# PushDataAttribute
+# ModelApiResponse
 
 
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**key** | **String** |  |  [optional] |
-|**value** | **String** |  |  [optional] |
+|**status** | **String** |  |  [optional] |
+|**message** | **String** |  |  [optional] |
 
 
 

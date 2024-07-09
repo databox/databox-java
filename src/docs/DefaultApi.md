@@ -1,80 +1,63 @@
-# Org.OpenAPITools.org.databox.api.DefaultApi
+# DefaultApi
 
 All URIs are relative to *https://push.databox.com*
 
 | Method | HTTP request | Description |
-|--------|--------------|-------------|
-| [**DataDelete**](DefaultApi.md#datadelete) | **DELETE** /data |  |
-| [**DataMetricKeyDelete**](DefaultApi.md#datametrickeydelete) | **DELETE** /data/{metricKey} |  |
-| [**DataPost**](DefaultApi.md#datapost) | **POST** /data |  |
-| [**MetrickeysGet**](DefaultApi.md#metrickeysget) | **GET** /metrickeys |  |
-| [**MetrickeysPost**](DefaultApi.md#metrickeyspost) | **POST** /metrickeys |  |
-| [**PingGet**](DefaultApi.md#pingget) | **GET** /ping |  |
+|------------- | ------------- | -------------|
+| [**dataDelete**](DefaultApi.md#dataDelete) | **DELETE** /data |  |
+| [**dataMetricKeyDelete**](DefaultApi.md#dataMetricKeyDelete) | **DELETE** /data/{metricKey} |  |
+| [**dataPost**](DefaultApi.md#dataPost) | **POST** /data |  |
+| [**metrickeysGet**](DefaultApi.md#metrickeysGet) | **GET** /metrickeys |  |
+| [**metrickeysPost**](DefaultApi.md#metrickeysPost) | **POST** /metrickeys |  |
+| [**pingGet**](DefaultApi.md#pingGet) | **GET** /ping |  |
 
-<a id="datadelete"></a>
-# **DataDelete**
-> void DataDelete ()
+
+<a id="dataDelete"></a>
+# **dataDelete**
+> dataDelete()
 
 
 
 ### Example
-```csharp
-using System.Collections.Generic;
-using System.Diagnostics;
-using Org.OpenAPITools.org.databox.api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+```java
+// Import classes:
+import org.databox.ApiClient;
+import org.databox.ApiException;
+import org.databox.Configuration;
+import org.databox.auth.*;
+import org.databox.models.*;
+import org.databox.api.DefaultApi;
 
-namespace Example
-{
-    public class DataDeleteExample
-    {
-        public static void Main()
-        {
-            Configuration config = new Configuration();
-            config.BasePath = "https://push.databox.com";
-            // Configure HTTP basic authorization: basicAuth
-            config.Username = "YOUR_USERNAME";
-            config.Password = "YOUR_PASSWORD";
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://push.databox.com");
+    
+    // Configure HTTP basic authorization: basicAuth
+    HttpBasicAuth basicAuth = (HttpBasicAuth) defaultClient.getAuthentication("basicAuth");
+    basicAuth.setUsername("YOUR USERNAME");
+    basicAuth.setPassword("YOUR PASSWORD");
 
-            var apiInstance = new DefaultApi(config);
-
-            try
-            {
-                apiInstance.DataDelete();
-            }
-            catch (ApiException  e)
-            {
-                Debug.Print("Exception when calling DefaultApi.DataDelete: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
-                Debug.Print(e.StackTrace);
-            }
-        }
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    try {
+      apiInstance.dataDelete();
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#dataDelete");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
-}
-```
-
-#### Using the DataDeleteWithHttpInfo variant
-This returns an ApiResponse object which contains the response data, status code and headers.
-
-```csharp
-try
-{
-    apiInstance.DataDeleteWithHttpInfo();
-}
-catch (ApiException e)
-{
-    Debug.Print("Exception when calling DefaultApi.DataDeleteWithHttpInfo: " + e.Message);
-    Debug.Print("Status Code: " + e.ErrorCode);
-    Debug.Print(e.StackTrace);
+  }
 }
 ```
 
 ### Parameters
 This endpoint does not need any parameter.
+
 ### Return type
 
-void (empty response body)
+null (empty response body)
 
 ### Authorization
 
@@ -85,83 +68,61 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
-
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-<a id="datametrickeydelete"></a>
-# **DataMetricKeyDelete**
-> void DataMetricKeyDelete (string metricKey)
+<a id="dataMetricKeyDelete"></a>
+# **dataMetricKeyDelete**
+> dataMetricKeyDelete(metricKey)
 
 
 
 ### Example
-```csharp
-using System.Collections.Generic;
-using System.Diagnostics;
-using Org.OpenAPITools.org.databox.api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+```java
+// Import classes:
+import org.databox.ApiClient;
+import org.databox.ApiException;
+import org.databox.Configuration;
+import org.databox.auth.*;
+import org.databox.models.*;
+import org.databox.api.DefaultApi;
 
-namespace Example
-{
-    public class DataMetricKeyDeleteExample
-    {
-        public static void Main()
-        {
-            Configuration config = new Configuration();
-            config.BasePath = "https://push.databox.com";
-            // Configure HTTP basic authorization: basicAuth
-            config.Username = "YOUR_USERNAME";
-            config.Password = "YOUR_PASSWORD";
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://push.databox.com");
+    
+    // Configure HTTP basic authorization: basicAuth
+    HttpBasicAuth basicAuth = (HttpBasicAuth) defaultClient.getAuthentication("basicAuth");
+    basicAuth.setUsername("YOUR USERNAME");
+    basicAuth.setPassword("YOUR PASSWORD");
 
-            var apiInstance = new DefaultApi(config);
-            var metricKey = "metricKey_example";  // string | 
-
-            try
-            {
-                apiInstance.DataMetricKeyDelete(metricKey);
-            }
-            catch (ApiException  e)
-            {
-                Debug.Print("Exception when calling DefaultApi.DataMetricKeyDelete: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
-                Debug.Print(e.StackTrace);
-            }
-        }
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    String metricKey = "metricKey_example"; // String | 
+    try {
+      apiInstance.dataMetricKeyDelete(metricKey);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#dataMetricKeyDelete");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
-}
-```
-
-#### Using the DataMetricKeyDeleteWithHttpInfo variant
-This returns an ApiResponse object which contains the response data, status code and headers.
-
-```csharp
-try
-{
-    apiInstance.DataMetricKeyDeleteWithHttpInfo(metricKey);
-}
-catch (ApiException e)
-{
-    Debug.Print("Exception when calling DefaultApi.DataMetricKeyDeleteWithHttpInfo: " + e.Message);
-    Debug.Print("Status Code: " + e.ErrorCode);
-    Debug.Print(e.StackTrace);
+  }
 }
 ```
 
 ### Parameters
 
-| Name | Type | Description | Notes |
-|------|------|-------------|-------|
-| **metricKey** | **string** |  |  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **metricKey** | **String**|  | |
 
 ### Return type
 
-void (empty response body)
+null (empty response body)
 
 ### Authorization
 
@@ -172,83 +133,61 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
-
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-<a id="datapost"></a>
-# **DataPost**
-> void DataPost (List<PushData>? pushData = null)
+<a id="dataPost"></a>
+# **dataPost**
+> dataPost(pushData)
 
 
 
 ### Example
-```csharp
-using System.Collections.Generic;
-using System.Diagnostics;
-using Org.OpenAPITools.org.databox.api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+```java
+// Import classes:
+import org.databox.ApiClient;
+import org.databox.ApiException;
+import org.databox.Configuration;
+import org.databox.auth.*;
+import org.databox.models.*;
+import org.databox.api.DefaultApi;
 
-namespace Example
-{
-    public class DataPostExample
-    {
-        public static void Main()
-        {
-            Configuration config = new Configuration();
-            config.BasePath = "https://push.databox.com";
-            // Configure HTTP basic authorization: basicAuth
-            config.Username = "YOUR_USERNAME";
-            config.Password = "YOUR_PASSWORD";
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://push.databox.com");
+    
+    // Configure HTTP basic authorization: basicAuth
+    HttpBasicAuth basicAuth = (HttpBasicAuth) defaultClient.getAuthentication("basicAuth");
+    basicAuth.setUsername("YOUR USERNAME");
+    basicAuth.setPassword("YOUR PASSWORD");
 
-            var apiInstance = new DefaultApi(config);
-            var pushData = new List<PushData>?(); // List<PushData>? |  (optional) 
-
-            try
-            {
-                apiInstance.DataPost(pushData);
-            }
-            catch (ApiException  e)
-            {
-                Debug.Print("Exception when calling DefaultApi.DataPost: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
-                Debug.Print(e.StackTrace);
-            }
-        }
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    List<PushData> pushData = Arrays.asList(); // List<PushData> | 
+    try {
+      apiInstance.dataPost(pushData);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#dataPost");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
-}
-```
-
-#### Using the DataPostWithHttpInfo variant
-This returns an ApiResponse object which contains the response data, status code and headers.
-
-```csharp
-try
-{
-    apiInstance.DataPostWithHttpInfo(pushData);
-}
-catch (ApiException e)
-{
-    Debug.Print("Exception when calling DefaultApi.DataPostWithHttpInfo: " + e.Message);
-    Debug.Print("Status Code: " + e.ErrorCode);
-    Debug.Print(e.StackTrace);
+  }
 }
 ```
 
 ### Parameters
 
-| Name | Type | Description | Notes |
-|------|------|-------------|-------|
-| **pushData** | [**List&lt;PushData&gt;?**](PushData.md) |  | [optional]  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **pushData** | [**List&lt;PushData&gt;**](PushData.md)|  | [optional] |
 
 ### Return type
 
-void (empty response body)
+null (empty response body)
 
 ### Authorization
 
@@ -259,78 +198,57 @@ void (empty response body)
  - **Content-Type**: application/json, application/vnd.databox.v2+json
  - **Accept**: Not defined
 
-
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-<a id="metrickeysget"></a>
-# **MetrickeysGet**
-> void MetrickeysGet ()
+<a id="metrickeysGet"></a>
+# **metrickeysGet**
+> metrickeysGet()
 
 
 
 ### Example
-```csharp
-using System.Collections.Generic;
-using System.Diagnostics;
-using Org.OpenAPITools.org.databox.api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+```java
+// Import classes:
+import org.databox.ApiClient;
+import org.databox.ApiException;
+import org.databox.Configuration;
+import org.databox.auth.*;
+import org.databox.models.*;
+import org.databox.api.DefaultApi;
 
-namespace Example
-{
-    public class MetrickeysGetExample
-    {
-        public static void Main()
-        {
-            Configuration config = new Configuration();
-            config.BasePath = "https://push.databox.com";
-            // Configure HTTP basic authorization: basicAuth
-            config.Username = "YOUR_USERNAME";
-            config.Password = "YOUR_PASSWORD";
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://push.databox.com");
+    
+    // Configure HTTP basic authorization: basicAuth
+    HttpBasicAuth basicAuth = (HttpBasicAuth) defaultClient.getAuthentication("basicAuth");
+    basicAuth.setUsername("YOUR USERNAME");
+    basicAuth.setPassword("YOUR PASSWORD");
 
-            var apiInstance = new DefaultApi(config);
-
-            try
-            {
-                apiInstance.MetrickeysGet();
-            }
-            catch (ApiException  e)
-            {
-                Debug.Print("Exception when calling DefaultApi.MetrickeysGet: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
-                Debug.Print(e.StackTrace);
-            }
-        }
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    try {
+      apiInstance.metrickeysGet();
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#metrickeysGet");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
-}
-```
-
-#### Using the MetrickeysGetWithHttpInfo variant
-This returns an ApiResponse object which contains the response data, status code and headers.
-
-```csharp
-try
-{
-    apiInstance.MetrickeysGetWithHttpInfo();
-}
-catch (ApiException e)
-{
-    Debug.Print("Exception when calling DefaultApi.MetrickeysGetWithHttpInfo: " + e.Message);
-    Debug.Print("Status Code: " + e.ErrorCode);
-    Debug.Print(e.StackTrace);
+  }
 }
 ```
 
 ### Parameters
 This endpoint does not need any parameter.
+
 ### Return type
 
-void (empty response body)
+null (empty response body)
 
 ### Authorization
 
@@ -341,83 +259,61 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
-
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-<a id="metrickeyspost"></a>
-# **MetrickeysPost**
-> void MetrickeysPost (Object? body = null)
+<a id="metrickeysPost"></a>
+# **metrickeysPost**
+> metrickeysPost(body)
 
 
 
 ### Example
-```csharp
-using System.Collections.Generic;
-using System.Diagnostics;
-using Org.OpenAPITools.org.databox.api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+```java
+// Import classes:
+import org.databox.ApiClient;
+import org.databox.ApiException;
+import org.databox.Configuration;
+import org.databox.auth.*;
+import org.databox.models.*;
+import org.databox.api.DefaultApi;
 
-namespace Example
-{
-    public class MetrickeysPostExample
-    {
-        public static void Main()
-        {
-            Configuration config = new Configuration();
-            config.BasePath = "https://push.databox.com";
-            // Configure HTTP basic authorization: basicAuth
-            config.Username = "YOUR_USERNAME";
-            config.Password = "YOUR_PASSWORD";
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://push.databox.com");
+    
+    // Configure HTTP basic authorization: basicAuth
+    HttpBasicAuth basicAuth = (HttpBasicAuth) defaultClient.getAuthentication("basicAuth");
+    basicAuth.setUsername("YOUR USERNAME");
+    basicAuth.setPassword("YOUR PASSWORD");
 
-            var apiInstance = new DefaultApi(config);
-            var body = null;  // Object? |  (optional) 
-
-            try
-            {
-                apiInstance.MetrickeysPost(body);
-            }
-            catch (ApiException  e)
-            {
-                Debug.Print("Exception when calling DefaultApi.MetrickeysPost: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
-                Debug.Print(e.StackTrace);
-            }
-        }
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    Object body = null; // Object | 
+    try {
+      apiInstance.metrickeysPost(body);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#metrickeysPost");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
-}
-```
-
-#### Using the MetrickeysPostWithHttpInfo variant
-This returns an ApiResponse object which contains the response data, status code and headers.
-
-```csharp
-try
-{
-    apiInstance.MetrickeysPostWithHttpInfo(body);
-}
-catch (ApiException e)
-{
-    Debug.Print("Exception when calling DefaultApi.MetrickeysPostWithHttpInfo: " + e.Message);
-    Debug.Print("Status Code: " + e.ErrorCode);
-    Debug.Print(e.StackTrace);
+  }
 }
 ```
 
 ### Parameters
 
-| Name | Type | Description | Notes |
-|------|------|-------------|-------|
-| **body** | **Object?** |  | [optional]  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **body** | **Object**|  | [optional] |
 
 ### Return type
 
-void (empty response body)
+null (empty response body)
 
 ### Authorization
 
@@ -428,78 +324,57 @@ void (empty response body)
  - **Content-Type**: application/json, application/vnd.databox.v2+json
  - **Accept**: Not defined
 
-
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-<a id="pingget"></a>
-# **PingGet**
-> void PingGet ()
+<a id="pingGet"></a>
+# **pingGet**
+> pingGet()
 
 
 
 ### Example
-```csharp
-using System.Collections.Generic;
-using System.Diagnostics;
-using Org.OpenAPITools.org.databox.api;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Model;
+```java
+// Import classes:
+import org.databox.ApiClient;
+import org.databox.ApiException;
+import org.databox.Configuration;
+import org.databox.auth.*;
+import org.databox.models.*;
+import org.databox.api.DefaultApi;
 
-namespace Example
-{
-    public class PingGetExample
-    {
-        public static void Main()
-        {
-            Configuration config = new Configuration();
-            config.BasePath = "https://push.databox.com";
-            // Configure HTTP basic authorization: basicAuth
-            config.Username = "YOUR_USERNAME";
-            config.Password = "YOUR_PASSWORD";
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://push.databox.com");
+    
+    // Configure HTTP basic authorization: basicAuth
+    HttpBasicAuth basicAuth = (HttpBasicAuth) defaultClient.getAuthentication("basicAuth");
+    basicAuth.setUsername("YOUR USERNAME");
+    basicAuth.setPassword("YOUR PASSWORD");
 
-            var apiInstance = new DefaultApi(config);
-
-            try
-            {
-                apiInstance.PingGet();
-            }
-            catch (ApiException  e)
-            {
-                Debug.Print("Exception when calling DefaultApi.PingGet: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
-                Debug.Print(e.StackTrace);
-            }
-        }
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+    try {
+      apiInstance.pingGet();
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#pingGet");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
-}
-```
-
-#### Using the PingGetWithHttpInfo variant
-This returns an ApiResponse object which contains the response data, status code and headers.
-
-```csharp
-try
-{
-    apiInstance.PingGetWithHttpInfo();
-}
-catch (ApiException e)
-{
-    Debug.Print("Exception when calling DefaultApi.PingGetWithHttpInfo: " + e.Message);
-    Debug.Print("Status Code: " + e.ErrorCode);
-    Debug.Print(e.StackTrace);
+  }
 }
 ```
 
 ### Parameters
 This endpoint does not need any parameter.
+
 ### Return type
 
-void (empty response body)
+null (empty response body)
 
 ### Authorization
 
@@ -510,11 +385,8 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
-
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
