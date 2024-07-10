@@ -48,7 +48,7 @@ jobs:
         path: ${{ github.workspace }}/src/.m2/settings.xml
                             
     - name: Publish SDK
-      run: mvn --batch-mode -DuseGitHubPackages=true deploy -s .m2/settings.xml
+      run: mvn --batch-mode -DuseGitHubPackages=true  -DaltDeploymentRepository=github::https://maven.pkg.github.com/databox/maven-libraries deploy -s .m2/settings.xml
       env:
         GITHUB_TOKEN: ${{ secrets.PACKAGES_PUBLISH_TOKEN }}
         GITHUB_USERNAME: ${{ github.actor }}
