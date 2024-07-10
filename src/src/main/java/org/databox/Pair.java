@@ -13,7 +13,7 @@
 
 package org.databox;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-10T07:29:04.136841Z[Etc/UTC]", comments = "Generator version: 7.6.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-10T07:53:22.529213Z[Etc/UTC]", comments = "Generator version: 7.6.0")
 public class Pair {
     private String name = "";
     private String value = "";
