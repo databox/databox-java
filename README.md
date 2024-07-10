@@ -2,7 +2,7 @@
 
 Static OpenAPI document of Push API resource
 - API version: 0.3.15-sdk.5
-  - Build date: 2024-07-10T07:18:17.061178Z[Etc/UTC]
+  - Build date: 2024-07-10T07:29:04.136841Z[Etc/UTC]
   - Generator version: 7.6.0
 
 Push API resources Open API documentation
