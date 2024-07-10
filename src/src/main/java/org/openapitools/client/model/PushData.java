@@ -52,7 +52,7 @@ import org.databox.JSON;
 /**
  * PushData
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-09T19:29:27.814676Z[Etc/UTC]", comments = "Generator version: 7.6.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-10T07:18:17.061178Z[Etc/UTC]", comments = "Generator version: 7.6.0")
 public class PushData {
   public static final String SERIALIZED_NAME_ATTRIBUTES = "attributes";
   @SerializedName(SERIALIZED_NAME_ATTRIBUTES)
