@@ -45,13 +45,14 @@ jobs:
             "username": "${{ github.actor }}",
             "password": "${{ secrets.PACKAGES_PUBLISH_TOKEN }}"
           }]
-        path: ${{ github.workspace }}/.m2/settings.xml
+        path: ${{ github.workspace }}/src/.m2/settings.xml
                             
     - name: Publish SDK
       run: mvn --batch-mode -DuseGitHubPackages=true deploy -s .m2/settings.xml
       env:
         GITHUB_TOKEN: ${{ secrets.PACKAGES_PUBLISH_TOKEN }}
         GITHUB_USERNAME: ${{ github.actor }}
+      working-directory: src
 
   release_publish:
     name: Publish release
