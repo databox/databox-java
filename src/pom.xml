@@ -5,7 +5,7 @@
     <artifactId>databox</artifactId>
     <packaging>jar</packaging>
     <name>databox</name>
-    <version>0.1.2</version>
+    <version>2.6.0</version>
     <url>https://github.com/databox/databox-java</url>
     <description>SDK Client for using Databox Push API feature</description>
     <scm>
