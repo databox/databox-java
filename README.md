@@ -1,8 +1,8 @@
 # databox
 
 Static OpenAPI document of Push API resource
-- API version: 0.4.1
-  - Build date: 2024-07-11T08:40:29.068083Z[Etc/UTC]
+- API version: 0.4.2
+  - Build date: 2024-07-12T11:00:38.722095Z[Etc/UTC]
   - Generator version: 7.6.0
 
 Push API resources Open API documentation
@@ -41,7 +41,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>org.databox</groupId>
   <artifactId>databox</artifactId>
-  <version>2.5.1</version>
+  <version>2.5.2</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -57,7 +57,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "org.databox:databox:2.5.1"
+     implementation "org.databox:databox:2.5.2"
   }
 ```
 
@@ -71,7 +71,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/databox-2.5.1.jar`
+* `target/databox-2.5.2.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
