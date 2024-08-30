@@ -140,7 +140,7 @@ public class Example {
         .key("Metric_name") // e.g. sales
         .value(123f)
         .date("Date_in_ISO8601") // e.g. "2024-08-01T00:00:00Z"
-        .unit("Unit") // optional - e.g. EUR
+        .unit("Unit") // optional - e.g. USD
         .attributes(List.of(new PushDataAttribute().key("Dimension_name").value("Dimension_value"))); // optional - e.g. currency & USD
 
         DefaultApi apiInstance = new DefaultApi(defaultClient);
